@@ -9,16 +9,24 @@ my_graph = {
 
 
 def shortest_path(graph, start):
-    unvisited = []
-    distances = {}
-    for node in graph:
-        unvisited.append(node)
-        if node == start:
-            distances[start] = 0
-        else:
-            distances[node] = float('inf')
-    print(unvisited)
-    print(distances)
+    unvisited = list(graph)
+    distances = {node: 0 if node == start else float('inf') for node in graph}
+    paths = {node: [] for node in graph}
+    paths[start].append(start)
+    print(f'Unvisited: {unvisited}\nDistances: {distances}\nPaths: {paths}')
+    count = 0
+    while unvisited:
+        count += 1
+        if count > 1:
+            return
+        current = min(unvisited, key=distances.get)
+        print('current ', current)
+        for node, distance in graph[current]:
+            print(node, distance)
+            print(graph[current])
+            if distances[current]+distance < distances[node]:
+                distances[node] = distances[current]+distance
+        print('dist: ', distances)
 
 
 shortest_path(my_graph, 'A')
