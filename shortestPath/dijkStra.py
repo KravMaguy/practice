@@ -35,4 +35,16 @@ def shortest_path(graph, start, target):
     print(' -> '.join(paths) + ' dist: '+str(distance))
 
 
-shortest_path(my_graph, 'A', 'C')
+def allPaths(graph, start, target):
+    start_que = graph[start]
+    que = []
+    for elem in start_que:
+        top_list = list(elem)
+        que.append(top_list)
+
+    for node in graph:
+        print(graph[node])
+
+
+# shortest_path(my_graph, 'A', 'C')
+allPaths(my_graph, 'A', 'C')
