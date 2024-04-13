@@ -4,21 +4,37 @@
 /*
  * This stores the total number of books in each shelf.
  */
-int *total_number_of_books;
+int *shelfSizes;
 
 /*
  * This stores the total number of pages in each book of each shelf.
  * The rows represent the shelves and the columns represent the books.
  */
-int **total_number_of_pages;
+int **pagesPerBook;
 
 int main()
 {
+
     int total_number_of_shelves;
     scanf("%d", &total_number_of_shelves);
 
     int total_number_of_queries;
     scanf("%d", &total_number_of_queries);
+    // memory shelfSizes store the number of books on each shelf.
+    // pagesPerBook multidimentional arr the number of pages in each book for each shelf.
+    // in loop set the initial values in shelfSizes to zero/no books.
+
+    // e.g. if three shelves space for 3 pointer to int (how many books on a given shelf)
+    shelfSizes = (int *)malloc(total_number_of_shelves * sizeof(int));
+    // type pointer to pointer to int (variable type adress that points to an adress that contains the adress
+    // of the size of the book)
+    pagesPerBook = (int **)malloc(total_number_of_shelves * sizeof(int *));
+
+    for (int i = 0; i < total_number_of_shelves; i++)
+    {
+        shelfSizes[i] = 0;
+        pagesPerBook[i] = (int *)malloc(1100 * sizeof(int));
+    }
 
     while (total_number_of_queries--)
     {
@@ -37,32 +53,32 @@ int main()
         {
             int x, y;
             scanf("%d %d", &x, &y);
-            printf("%d\n", *(*(total_number_of_pages + x) + y));
+            printf("%d\n", *(*(pagesPerBook + x) + y));
         }
         else
         {
             int x;
             scanf("%d", &x);
-            printf("%d\n", *(total_number_of_books + x));
+            printf("%d\n", *(shelfSizes + x));
         }
     }
 
-    if (total_number_of_books)
+    if (shelfSizes)
     {
-        free(total_number_of_books);
+        free(shelfSizes);
     }
 
     for (int i = 0; i < total_number_of_shelves; i++)
     {
-        if (*(total_number_of_pages + i))
+        if (*(pagesPerBook + i))
         {
-            free(*(total_number_of_pages + i));
+            free(*(pagesPerBook + i));
         }
     }
 
-    if (total_number_of_pages)
+    if (pagesPerBook)
     {
-        free(total_number_of_pages);
+        free(pagesPerBook);
     }
 
     return 0;
