@@ -25,14 +25,24 @@ int main()
     // in loop set the initial values in shelfSizes to zero/no books.
 
     // e.g. if three shelves space for 3 pointer to int (how many books on a given shelf)
+    // this is a pointer to array that has space for 3 shelves of size X int
+    // e.g. ptr -> [20(books), 10, 899992]
     shelfSizes = (int *)malloc(total_number_of_shelves * sizeof(int));
     // type pointer to pointer to int (variable type adress that points to an adress that contains the adress
     // of the size of the book)
+    // total_number_of_pages
+    //         ▼
+    //         |
+    //    [ ptr1 | ptr2 | ptr3 ]   // Pointer to pointers (each pointer to a row of books)
+    //      |      |      |
+    //      ▼      ▼      ▼
+    //   [ 5 | 3 ] [ 7 ] [ 6 | 8 | 2 ]
     pagesPerBook = (int **)malloc(total_number_of_shelves * sizeof(int *));
 
     for (int i = 0; i < total_number_of_shelves; i++)
     {
         shelfSizes[i] = 0;
+        // each subarray has space for 1100 integers // 1100 bookPagesSizes
         pagesPerBook[i] = (int *)malloc(1100 * sizeof(int));
     }
 
