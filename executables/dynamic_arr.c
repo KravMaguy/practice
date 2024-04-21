@@ -60,19 +60,19 @@ int main()
             scanf("%d %d", &x, &y);
             // 1 x y : Insert a book with y pages at the end of the xth shelf.
             shelfSizes[x] = shelfSizes[x] + 1;
-            pagesPerBook[x][shelfSizes[x] - 1] = y;
+            *(*(pagesPerBook + x) + *(shelfSizes + x) - 1) = y;
         }
         else if (type_of_query == 2)
         {
             int x, y;
             scanf("%d %d", &x, &y);
-            printf("%d\n", *(*(pagesPerBook + x) + y));
+            printf("%d\n", pagesPerBook[x][y]);
         }
         else
         {
             int x;
             scanf("%d", &x);
-            printf("%d\n", *(shelfSizes + x));
+            printf("%d\n", shelfSizes[x]);
         }
     }
 
